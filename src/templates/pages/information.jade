@@ -1,0 +1,20 @@
+table.table.table-striped
+  thead
+    tr
+      th e-mail
+      th username
+      th company
+      th activation code
+      th Project
+      th key
+      th date
+  tbody
+    tr(ng-repeat="inf in data")
+      td {{inf.email}}
+      td {{inf.username}}
+      td {{inf.company}}
+      td {{inf.code}}
+      td
+        span(ng-repeat="proj in showdata.projects" ng-show="proj.id == inf.project") {{proj.name}}
+      td {{inf.key}}
+      td {{inf.time}}

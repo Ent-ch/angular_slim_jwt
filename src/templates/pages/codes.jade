@@ -1,0 +1,29 @@
+.row
+  .col-sm-3
+      a.btn.btn-primary(href="#/{{showdata.route}}/add") Add {{showdata.route}}
+      //button.btn.btn-danger(type="button") Delete all codes
+  //.col-sm-2
+    select.form-control(ng-model="query.project" ng-options="item.id as item.name for item in showdata.projects")    
+  //.col-sm-2(ng-simpl-filter="project")
+  
+  .col-sm-3(ng-simpl-filter="code")
+.row
+  table.table.table-striped.col-md-12
+    thead
+      tr
+        th.text-capitalize {{showdata.route}}
+        th Project
+        th Status
+        th Action
+    tbody
+      tr(ng-repeat="code in data | filter:query")
+        td {{code.code}}
+        td 
+          // span {{code.project}}
+          span(ng-repeat="proj in showdata.projects" ng-show="proj.id == code.project") {{proj.name}}
+        td(ng-switch="code.status")
+          span.glyphicon.glyphicon-ok(ng-switch-when="1")
+          span.glyphicon.glyphicon-ban-circle(ng-switch-when="2")
+          span.glyphicon.glyphicon-warning-sign(ng-switch-when="3")
+        td(ng-list-ops)
+        

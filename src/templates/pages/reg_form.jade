@@ -1,0 +1,65 @@
+h1.text-center Activation system
+//h2 {{timeleft}}
+.reg-form(ng-show="!showModel.timeleft && !showModel.dataSend")
+    form.form-horizontal(name='regForm' novalidate)
+        .form-group(ng-class="{ 'has-error': regForm.selproj.$touched && regForm.selproj.$invalid }")
+            .row
+                .col-md-4.col-md-offset-2
+                    select.form-control(ng-model="regModel.selproj" name="selproj" ng-options="item.id as item.name for item in showModel.projects" required)
+                    .help-block(ng-messages="regForm.selproj.$error" ng-if="regForm.selproj.$touched" ng-messages-include="error-messages")
+                .col-md-4
+                    a.btn.btn-success(href="#/restore") Remind me my license information
+
+        .form-group(ng-class="{ 'has-error': regForm.code.$touched && regForm.code.$invalid }")
+            label.col-md-3.control-label(for="input1") Activation code
+            .col-md-4
+                input#input1.form-control(type="text" name="code" ng-model="regModel.code" required)
+                .help-block(ng-messages="regForm.code.$error" ng-if="regForm.code.$touched" ng-messages-include="error-messages")
+
+        .form-group(ng-class="{ 'has-error': regForm.uname.$touched && regForm.uname.$invalid }")
+            label.col-md-3.control-label(for="input2") Name
+            .col-md-4
+                input#input2.form-control(type="text" name="uname" ng-model="regModel.uname" required)
+                .help-block(ng-messages="regForm.uname.$error" ng-if="regForm.uname.$touched" ng-messages-include="error-messages")
+
+        .form-group(ng-class="{ 'has-error': regForm.email.$touched && regForm.email.$invalid }")
+            label.col-md-3.control-label(for="input3") e-mail
+            .col-md-4
+                input#input3.form-control(type="email" name="email" ng-model="regModel.email" required)
+                .help-block(ng-messages="regForm.email.$error" ng-if="regForm.email.$touched" ng-messages-include="error-messages")
+
+        .form-group
+            label.col-md-3.control-label(for="input4") Company
+            .col-md-4
+                input#input4.form-control(type="text" ng-model="regModel.company")
+
+        .form-group
+            .col-md-2.col-md-offset-5
+                input#submit.btn.btn-primary(type="submit" value="Submit" ng-click="Submit()")
+                
+.reg-status(ng-show="showModel.timeleft && !showModel.dataSend")
+    h2 Wait before repeat.
+    
+h2.text-center(ng-show="showModel.dataSend") Data sent
+    //.text-center Mess: {{showModel.message}}
+    //.text-center status: {{showModel.status}}
+    .status.text-center(ng-switch="showModel.status")
+        .text-center.bg-info(ng-switch-when="200") 
+            |Activation successful. Check your email (including Spam folder).
+            |The letter must be delievered in the course of 1 hours.
+        .text-center.bg-warning(ng-switch-when="400") Wrong data!
+        .text-center.bg-warning(ng-switch-when="404") 
+            |Attention! You entered a wrong or used activation code!
+        .text-center.bg-warning(ng-switch-when="403")
+            |There are problems with your activation code. Please contact administrator.
+        .text-center.bg-warning(ng-switch-when="409")
+            |Unfortunately, there are no more keys. We are already working on this issue.
+        .text-center.bg-warning(ng-switch-when="500") Server error!
+        
+    
+            
+            
+script#error-messages(type="text/ng-template")
+  <span ng-message="required">This field is required</span>
+  <span ng-message="minlength">This field is too short</span>
+  <span ng-message="email">Your email address is invalid</span>

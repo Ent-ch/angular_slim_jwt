@@ -1,0 +1,27 @@
+.row
+  .col-sm-2
+      a.btn.btn-primary(href="#/projects/new") Add project
+  
+  .col-sm-3(ng-simpl-filter="name")
+
+.row
+  table.table.table-striped.col-md-12
+    thead
+      tr
+        th id
+        th Project
+        th Status
+        th Action
+    tbody
+      tr(ng-repeat="proj in data | filter:query")
+        td {{proj.id}}
+        td {{proj.name}}
+        td 
+          span.glyphicon(ng-class = "(proj.status > 0) ? 'glyphicon-ok-circle' : 'glyphicon-ban-circle' ")
+        td 
+          a.ops(href="#/projects/edit/{{proj.id}}")
+              i.glyphicon.glyphicon-pencil
+          //a
+              span.glyphicon.glyphicon-ok-circle
+          //a
+              span.glyphicon.glyphicon-ban-circle

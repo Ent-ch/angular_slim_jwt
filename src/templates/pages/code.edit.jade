@@ -1,0 +1,19 @@
+h1.text-center {{model.title}}
+form.form-horizontal
+    // .form-group(ng-if="model.dataTitle == 'keys'")
+    .form-group
+        label.col-md-3.control-label Project
+        .col-md-4
+            select.form-control(ng-model="model.cproj" ng-options="item.id as item.name for item in model.projects")
+            
+    .form-group
+        label.col-md-3.control-label(for="input3") {{model.dataTitle}}
+        .col-md-4
+                
+            | Every {{model.dataTitle}} at new line
+            textarea#input3.form-control(ng-model="model.data" rows="6" cols="80" required)
+
+    .row
+        .col-md-2.col-md-offset-4
+            a.btn.btn-primary.pull-left(ng-click="save()") Submit  
+            

@@ -1,0 +1,12 @@
+doctype html
+html(ng-app="keyApp")
+include inc/header.jade
+body
+    header(ng-if="sv")
+        include inc/menu.jade
+
+    .container
+        div(ng-view)
+
+
+include inc/footer.jade

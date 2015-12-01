@@ -1,0 +1,18 @@
+.row
+  .mainbox.col-md-4.col-md-offset-3
+    .panel.panel-info
+      .panel-heading
+        .panel-title Login
+      .panel-body
+        form.form-horizontal(name="loginForm", method="post", ng-submit="submit()", novalidate)
+          .input-group(style="margin-top: 25px")
+            span.input-group-addon
+              i.glyphicon.glyphicon-user
+            input.form-control(type="text", name="username", ng-model="username", placeholder="Username", required)
+          .input-group(style="margin-top: 25px")
+            span.input-group-addon
+              i.glyphicon.glyphicon-lock
+            input.form-control(type="password", name="password", ng-model="password", placeholder="Password", required)
+          .form-group(style="margin-top: 10px")
+            .col-sm-12.controls
+              input#btn-login.btn.btn-success(type="submit", value="Login")

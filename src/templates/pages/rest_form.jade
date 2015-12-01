@@ -1,0 +1,28 @@
+h1.text-center Reminding license information
+.reg-form(ng-show="!showModel.timeleft && !showModel.dataSend")
+    form.form-horizontal(name='regForm' novalidate)
+        .form-group(ng-class="{ 'has-error': regForm.email.$touched && regForm.email.$invalid }")
+            label.col-md-3.control-label(for="input3") e-mail
+            .col-md-4
+                input#input3.form-control(type="email" name="email" ng-model="regModel.email" required)
+                .help-block(ng-messages="regForm.email.$error" ng-if="regForm.email.$touched" ng-messages-include="error-messages")
+    
+        .row
+            .col-md-2.col-md-offset-4
+                input#submit.btn.btn-primary(type="submit" value="Submit" ng-click="Submit()")  
+                
+                a.btn.btn-success.pull-right(href="#/") Back
+
+.reg-status.bg-warning(ng-show="showModel.timeleft && !showModel.dataSend")
+    h2 Wait before repeat.
+    
+h2.text-center.bg-success(ng-show="showModel.dataSend") Data sent
+    .status.text-center(ng-switch="showModel.status")
+        .text-center.bg-info(ng-switch-when="200") 
+            |Info sent!
+        .text-center.bg-warning(ng-switch-when="400") Wrong data!
+        .text-center.bg-warning(ng-switch-when="404") E-mail not found!
+
+script#error-messages(type="text/ng-template")
+  <span ng-message="required">This field is required</span>
+  <span ng-message="email">Your email address is invalid</span>
